@@ -1,0 +1,189 @@
+/* src/App.css */
+
+/* 1. GLOBAL RESET & SCROLL LOCK */
+body, html {
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Prevent scrolling the whole page */
+  height: 100%;
+}
+
+/* 2. MAIN LAYOUT CONTAINER */
+.app-container {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  width: 100vw;
+  background-color: #F0EAD6; /* Global Parchment Color */
+  color: #2F2F2F; /* Ink Color */
+}
+
+/* 3. CENTER STAGE (The "Table") */
+.main-stage {
+  flex-grow: 1; /* Takes all remaining space between Nav and Inventory */
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: radial-gradient(#F0EAD6 20%, #e3ddc8 80%); /* Subtle vignette */
+}
+
+/* Prevents the sidebars from shrinking when window gets small */
+.nav-rail, .inventory-container {
+  flex-shrink: 0; 
+}
+
+/* --- TEXTURE CLASSES --- */
+
+/* THE JOURNAL (For Inventory/Modals) */
+.paper-texture {
+  /* The Real Image */
+  background-image: url('https://cdn.jsdelivr.net/gh/cshirley-droid/catalyst@main/parchment.jpeg?raw=true');
+  /* Tiling Settings */
+  background-repeat: repeat;
+  background-size: 600px; 
+  background-color: #e8e0cc;   
+  box-shadow: inset 0 0 30px rgba(0,0,0,0.15); 
+}
+
+/* THE WORKBENCH (For Lab Background) */
+.wood-texture {
+  background-image: url('https://cdn.jsdelivr.net/gh/cshirley-droid/catalyst@main/wood.jpeg?raw=true');
+  background-repeat: no-repeat;
+  background-size: cover; 
+  background-position: center;
+  background-color: #3e2b1d;
+  box-shadow: inset 0 0 150px rgba(0,0,0,0.7); 
+}
+
+/* THE STUDY (For Guide Background) */
+.leather-texture {
+  background-image: url('https://cdn.jsdelivr.net/gh/cshirley-droid/catalyst@main/leather.jpeg?raw=true');
+  background-color: #2c1e1e; 
+  background-repeat: repeat;
+  background-size: 400px;
+}
+
+/* THE MONOLITH (For System Menu) */
+.stone-texture {
+  background-image: url('https://cdn.jsdelivr.net/gh/cshirley-droid/catalyst@main/obsidian.jpeg?raw=true');
+  background-color: #1a1a1a; 
+  background-repeat: repeat;
+  background-size: 400px;
+  color: #F0EAD6; 
+}
+
+/* Debug / Placeholder Utility */
+.stage-placeholder {
+  font-size: 3rem;
+  font-family: 'Courier New', Courier, monospace;
+  opacity: 0.5;
+  border: 4px dashed #aaa;
+  padding: 40px;
+  border-radius: 20px;
+}
+.toast-notification {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(44, 36, 27, 0.95);
+  color: #fcf9f0;
+  padding: 15px 30px;
+  border: 1px solid #d4cfb8;
+  border-radius: 4px;
+  font-family: 'Crimson Text', serif;
+  font-size: 1.1rem;
+  z-index: 2000;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+  animation: fadeUp 0.3s ease-out;
+  pointer-events: none;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translate(-50%, 10px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+/* SPLASH SCREEN */
+.splash-screen {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  background-color: #2c241b;
+  transition: opacity 1s ease-out, visibility 1s linear;
+}
+
+/* ADD THIS NEW BLOCK */
+.splash-screen.fade-out {
+  opacity: 0;
+  visibility: hidden; /* Ensures it can't be clicked while fading */
+  pointer-events: none;
+}
+
+.splash-content {
+  /* Use flexbox to center items vertically */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  text-align: center; /* Keeps text centered */
+  color: #d4cfb8;
+}
+
+.splash-title {
+  font-family: 'Cinzel', serif;
+  font-size: 5rem;
+  letter-spacing: 10px;
+  margin: 0;
+  text-shadow: 0 0 20px rgba(0,0,0,0.8);
+}
+
+.splash-subtitle {
+  font-family: 'Pinyon Script', cursive;
+  font-size: 2rem;
+  margin-top: -10px;
+  margin-bottom: 40px;
+  opacity: 0.8;
+}
+
+.splash-btn {
+  font-size: 1.2rem;
+  padding: 15px 40px;
+  border: 1px solid #d4cfb8;
+  align-items: center;
+}
+/* src/App.css */
+
+.debug-era-controls {
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  padding: 10px 20px;
+  border-radius: 20px;
+  display: flex;
+  gap: 10px;
+  z-index: 9999; /* Higher than everything, even the fog */
+  border: 1px solid #00ff00;
+  box-shadow: 0 0 10px #00ff00;
+}
+
+.debug-era-btn {
+  background: #333;
+  color: #00ff00;
+  border: 1px solid #00ff00;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-family: monospace;
+  font-weight: bold;
+}
+
+.debug-era-btn:hover, .debug-era-btn.active {
+  background: #00ff00;
+  color: black;
+}

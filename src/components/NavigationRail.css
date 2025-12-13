@@ -1,0 +1,62 @@
+/* src/components/NavigationRail.css */
+.nav-rail {
+  width: 70px;
+  background-color: #e6dfc8;
+  border-right: 3px solid #3e3e3e;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  /* Pushes top items to top, bottom items to bottom */
+  justify-content: space-between; 
+  
+  /* THE FIXES */
+  height: 100vh;
+  box-sizing: border-box; /* Critical: Makes padding part of the 100vh height */
+  padding-top: 20px;
+  padding-bottom: 20px;   /* Massive space to lift Ouroboros above Taskbar */
+  z-index: 100;
+}
+
+.nav-group {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.nav-btn {
+  width: 50px;
+  height: 50px;
+  border: 2px solid #8b8b8b;
+  border-radius: 8px;
+  background-color: #fcf9f0;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-btn:hover {
+  transform: scale(1.1);
+  border-color: #000;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+}
+
+.nav-btn.active {
+  background-color: #3e3e3e; /* Inverted Ink Style */
+  border-color: #000;
+  color: #fff; /* Inverted Icon */
+}
+
+/* Specific styling for the Ouroboros */
+.nav-btn.danger {
+  border-color: #8b4444;
+  color: #8b4444;
+}
+.nav-btn.danger:hover {
+  background-color: #8b4444;
+  color: #fff;
+}

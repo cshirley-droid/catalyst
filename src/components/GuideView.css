@@ -1,0 +1,182 @@
+/* src/components/GuideView.css */
+
+/* 1. THE DESK (Container) */
+.guide-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Dark wood desk background */
+  background-color: #2c241b;
+}
+
+/* 2. THE BOOK OBJECT */
+.guide-book {
+  width: 600px;
+  height: 80vh;
+  background-color: #fcf9f0;
+  border-radius: 4px 16px 16px 4px;
+  
+  /* 3D Effects */
+  box-shadow: 
+    inset 20px 0 50px rgba(0,0,0,0.1), /* Spine shadow */
+    10px 10px 30px rgba(0,0,0,0.5);   /* Desk shadow */
+    
+  padding: 40px;
+  overflow-y: auto;
+  border-left: 12px solid #5d4037; /* Leather spine binding */
+  
+  /* Global Font for the book body */
+  font-family: 'Crimson Text', serif;
+}
+
+/* 3. BOOK HEADER */
+.guide-header {
+  text-align: center;
+  border-bottom: 2px solid #3e3e3e;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+}
+
+h2 {
+  margin: 0;
+  font-family: 'Cinzel', serif; /* Official Title Font */
+  font-size: 2.5rem;
+  color: #3e3e3e;
+}
+
+.guide-subtitle {
+  font-size: 0.9rem;
+  color: #8b4444;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-family: 'Cinzel', serif;
+}
+
+/* 4. RECIPE LIST CONTAINER */
+.guide-content {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* src/components/GuideView.css (Partial Update) */
+
+/* 5. INDIVIDUAL ENTRY CARD */
+.recipe-entry {
+  width: 100%; 
+  box-sizing: border-box; 
+  
+  display: flex;
+  align-items: center; 
+  justify-content: space-between;
+  
+  gap: 15px;
+  padding: 15px;
+  border-radius: 8px;
+  transition: all 0.2s;
+  
+  /* BASE CARD STYLE */
+  background-color: #fff; /* Default white card */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+}
+
+/* Unlocked Look - The "Nice" Card */
+.recipe-entry.unlocked {
+  border: 1px solid #d4cfb8;
+  /* A slightly translucent white lets the texture peek through just a tiny bit, 
+     but keeps the card distinct */
+  background-color: rgba(255, 255, 255, 0.7); 
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+/* Locked Look - The "Disabled" Card */
+.recipe-entry.locked {
+  opacity: 0.5;
+  background-color: rgba(0,0,0,0.05); /* Darker/Greyed out */
+  border: 1px dashed #ccc;
+  box-shadow: none;
+}
+
+.recipe-icon {
+  font-size: 2.5rem;
+  width: 60px;
+  text-align: center;
+  flex-shrink: 0; /* Don't squash the icon */
+}
+
+.recipe-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+  /* IMPORTANT: This eats up the empty space in the middle */
+  flex-grow: 1; 
+}
+
+/* --- NEW TYPOGRAPHY STYLES --- */
+
+/* The Item Name (e.g. "Charcoal") */
+.recipe-name {
+  font-family: 'Pinyon Script', cursive; /* Fancy Handwriting */
+  font-size: 2.2rem;
+  line-height: 2rem;
+  color: #2f2f2f;
+  margin-bottom: 5px;
+}
+
+/* The Equation Line */
+.recipe-equation {
+  font-family: 'Crimson Text', serif;
+  font-size: 1.1rem;
+  font-style: italic;
+  color: #444;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+/* The Station Tag ([RETORT]) */
+.eq-station {
+  font-family: 'Cinzel', serif;
+  font-size: 0.7rem;
+  font-weight: bold;
+  color: #8b4444;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background-color: rgba(0,0,0,0.05);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-style: normal;
+}
+
+.eq-arrow {
+  font-style: normal;
+  color: #8b8b8b;
+}
+
+/* The "Fig. 1" Stamp */
+.recipe-meta {
+  font-family: 'Cinzel', serif;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #8b4444;
+  opacity: 0.5;
+  align-self: flex-start; /* Stick to top right */
+}
+
+/* --- NEW: SCIENCE EXPLAINER TEXT --- */
+.recipe-science {
+  font-family: 'Crimson Text', serif;
+  font-size: 0.95rem;
+  color: #5a4a42; /* Sepia/Ink color */
+  font-style: italic;
+  
+  margin-top: 8px;
+  padding-left: 12px;
+  border-left: 2px solid #d4cfb8; /* Vertical line to group it */
+  
+  line-height: 1.4;
+}

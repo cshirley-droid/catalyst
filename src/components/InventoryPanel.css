@@ -1,0 +1,205 @@
+/* src/components/InventoryPanel.css */
+
+/* 1. MAIN CONTAINER (Locked Width) */
+.inventory-container {
+  width: 300px;
+  min-width: 300px; /* Prevent crushing */
+  max-width: 300px; /* Prevent growing */
+  border-left: 3px solid #3e3e3e;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #f0ead6; /* Fallback */
+  overflow: hidden; /* No global scrollbars */
+}
+
+/* --- TABS --- */
+.inventory-tabs {
+  display: flex;
+  border-bottom: 2px solid #3e3e3e;
+  background-color: rgba(0,0,0,0.05);
+  flex-shrink: 0;
+}
+
+.tab-btn {
+  flex: 1;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  padding: 8px 5px;
+  cursor: pointer;
+  opacity: 0.8; 
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
+.tab-btn:hover {
+  background-color: rgba(255,255,255,0.3);
+  opacity: 1;
+}
+
+.tab-btn.active {
+  opacity: 1;
+  border-bottom: 3px solid #8b4444;
+  background-color: rgba(139, 68, 68, 0.05);
+}
+
+.tab-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #3e3e3e;
+}
+
+.tab-btn img {
+  display: block;
+  filter: contrast(140%) saturate(120%) drop-shadow(0 0 1px rgba(255,255,255,0.8)) !important;
+}
+
+/* --- PROGRESS BAR --- */
+.civilization-progress {
+  padding: 10px;
+  border-bottom: 1px solid #3e3e3e;
+  font-size: 0.8rem;
+  text-align: center;
+  font-family: 'Cinzel', serif;
+  font-weight: bold;
+  color: #555;
+  background-color: rgba(0,0,0,0.05);
+  flex-shrink: 0;
+}
+
+/* --- LIST AREA (The Grid) --- */
+.inventory-grid {
+  flex: 1;
+  overflow-y: auto; /* Allow vertical scrolling */
+  overflow-x: hidden;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 8px;
+  align-content: start; /* Items stick to top, don't stretch */
+}
+
+/* --- ITEM CARD (The Box) --- */
+.item-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  
+  background-color: #fff;
+  border: 1px solid #d4cfb8;
+  border-radius: 4px;
+  padding: 4px; 
+  
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  
+  /* SCROLL FIXES: */
+  width: 100%;          /* Fill column */
+  aspect-ratio: 1 / 1;  /* Force square shape */
+  min-height: 90px;     /* Never get smaller than this */
+  flex-shrink: 0;       /* Do not let parent squash me */
+  
+  overflow: hidden; 
+}
+
+.item-card:hover {
+  transform: scale(1.05);
+  border-color: #3e3e3e;
+  z-index: 10;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* --- ICON WRAPPER (The Painting Frame) --- */
+.item-icon-wrapper {
+  width: 100%;
+  /* Give the image 70% of the square's height */
+  height: 70%; 
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  /* CRITICAL: Prevent flex from crushing it */
+  flex-shrink: 0; 
+}
+
+/* The Image Itself */
+.item-icon-wrapper img {
+  /* Use almost all the wrapper space */
+  width: 95%;
+  height: 95%;
+  object-fit: contain; 
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
+}
+
+/* --- TEXT LABEL (The Caption) --- */
+.item-name {
+  font-family: 'Crimson Text', serif;
+  font-size: 0.7rem; 
+  line-height: 0.8rem;
+  text-align: center;
+  font-weight: 700;
+  color: #2f2f2f;
+  
+  /* Take remaining 30% space */
+  height: 30%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  /* Ensure it fits horizontally */
+  width: 100%;
+  padding: 0 2px;
+  overflow: hidden;
+}
+
+/* --- QUANTITY BADGE --- */
+.item-badge {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  
+  background-color: #8b4444; 
+  color: #fff;
+  border: 1px solid #fff; 
+  
+  font-size: 0.65rem;
+  font-weight: bold;
+  
+  min-width: 18px;
+  height: 18px;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9px;
+  
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  font-family: 'Courier New', monospace;
+  z-index: 15;
+}
+
+/* --- STATES --- */
+.item-card.locked {
+  background-color: rgba(0,0,0,0.05);
+  border: 1px dashed #bbb;
+  opacity: 0.6;
+}
+.item-card.empty {
+  filter: grayscale(100%);
+  opacity: 0.6;
+}
+.item-card.empty:hover {
+  opacity: 0.9;
+  filter: grayscale(0%);
+}

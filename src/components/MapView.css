@@ -1,0 +1,155 @@
+/* src/components/MapView.css */
+
+.map-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  background-color: #d8d0b8; 
+}
+
+/* Simulated Map Quadrants */
+.map-background {
+  width: 100%;
+  height: 100%;
+  /* Ensure the background image scales to fill the new, larger space */
+  background-size: cover; 
+  background-position: center;
+  position: relative; /* Anchor for absolute positioned resource pins */
+  overflow: hidden; /* prevents scrolling if pins go slightly off-edge */
+  background-image: url('https://cdn.jsdelivr.net/gh/cshirley-droid/catalyst@main/map_background.jpg?raw=truee'); 
+}
+
+/* Debug Labels */
+.biome-label {
+  position: absolute;
+  
+  /* UPDATED: Cartography Style */
+  font-family: 'Cinzel', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 5px; /* Wide spacing looks very "Map-like" */
+  pointer-events: none;
+  
+  /* Optional: Add a subtle glow so they read over dark mountains */
+  text-shadow: 0 0 10px rgba(255,255,255,0.5);
+}
+
+/* NEW POSITIONS */
+.biome-label.mines  { top: 10%; left: 10%;
+  color: #2F2F2F; /* Dark Ink to stand out against white snow */
+  opacity: 0.6;   /* Stronger opacity */ }    /* Top Left */
+
+.biome-label.coast  { top: 10%; right: 10%;
+  color: #2F2F2F; /* Dark Ink to stand out against light sky */
+  opacity: 0.5; }   /* Top Right */
+.biome-label.forest { bottom: 10%; left: 10%;
+  color: #F0EAD6; /* LIGHT PARCHMENT color to pop against dark trees */
+  opacity: 0.8;   /* High opacity for visibility */
+  text-shadow: 0 0 5px rgba(0,0,0,0.8); /* Dark shadow for extra legibility */ } /* Bottom Left */
+.biome-label.farm   { bottom: 10%; right: 10%;
+  color: #3e2b1d; /* Very dark brown to look like "earth" */
+  opacity: 0.7;
+  /* Optional: A subtle light glow behind it to separate it from the noisy grass texture */
+  text-shadow: 0 0 10px rgba(255,255,255,0.4); }/* Bottom Right */
+
+/* --- THE PINS --- */
+.resource-pin {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  
+  /* Increased Size for Visibility */
+  width: 50px;
+  height: 50px;
+  
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.1s;
+  
+  /* Flex centering for the image */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  /* Allow the art to breathe (don't crop strictly) */
+  overflow: visible; 
+  padding: 0;
+  z-index: 10;
+}
+
+.resource-pin:hover {
+  /* 1. Scale up the art */
+  transform: translate(-50%, -50%) scale(1.05); 
+  z-index: 20;
+  
+  /* 2. KILL THE WHITE BOX */
+  background-color: transparent !important;
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important; /* Remove box shadow if any */
+
+  /* 3. Add a "Glow" around the art instead of a box behind it */
+  /* This creates a halo effect around the watercolor shape itself */
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.9)); 
+}
+
+.resource-pin:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+  background-color: #fff;
+  border-color: #000;
+  z-index: 20;
+}
+
+.resource-pin.pop {
+  transform: translate(-50%, -50%) scale(0.9);
+  background-color: #8fbc8f;
+}
+
+/* src/components/MapView.css */
+
+.fog-of-war {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  
+  /* Default Base: Dark smoky overlay */
+  /* We use background-image instead of background-color so we can control the gradients */
+  background-color: transparent;
+  
+  /* This handles the fading out of the fog entirely in Era 3 */
+  transition: opacity 2s ease-in-out; 
+  pointer-events: none; 
+  z-index: 10;
+}
+
+/* --- Dynamic Fog States: Soft Gradients --- */
+
+/* ERA 0: Darkness everywhere, except a soft hole around the Salt/Tutorial area (Top Right) */
+.era-0-fog {
+  opacity: 1;
+  /* "transparent 10%" is the clear center. "rgba... 40%" is where the fog becomes fully thick. */
+  background: radial-gradient(circle at 85% 50%, transparent 0%, rgba(0, 0, 0, 0.9) 12%);
+}
+
+/* ERA 1: FOREST unlocked. Fog stays at the TOP, fades to clear at the BOTTOM. */
+.era-1-fog {
+  opacity: 1;
+  /* Linear gradient: Dark at top (0%), fading to transparent around 65% down the map */
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9) 33%, transparent 95%);
+}
+
+/* ERA 2: COAST unlocked. Fog retreats to the TOP LEFT (Mines). */
+.era-2-fog {
+  opacity: 1;
+  /* Radial gradient centered on the Top-Left corner (Mines area) */
+  background: radial-gradient(circle at 15% 15%, rgba(0, 0, 0, 0.90) 20%, transparent 65%);
+}
+
+/* ERA 3+: ALL unlocked. Fog fades away completely. */
+.era-3-plus-fog {
+  opacity: 0; /* The transition property on .fog-of-war will make this fade out smoothly */
+  background: transparent;
+}
